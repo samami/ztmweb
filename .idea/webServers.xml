@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="679d651e-6a69-4343-89dc-161230b0979c" name="Dreamhost Deckhand" url="http://ztmweb.samami.com">
+        <fileTransfer rootFolder="/home/samami" accessType="SFTP" host="deckhand.dreamhost.com" port="22" sshConfigId="fb794dd3-7142-4200-a922-c0448d2fef07" sshConfig="samami@deckhand.dreamhost.com:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
