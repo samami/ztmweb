@@ -19,16 +19,31 @@ def write_to_file(data):
         message = data['message']
         file = database.write(f'\n{email}, {name}, {message}')
 
-def write_to_mongo(data):
+
+def connect_to_mongo():
     uri = 'mongodb+srv://samami:jWsSXAlSaXbge2eP@cluster0.vhyil.mongodb.net/general?retryWrites=true&w=majority'
     client = MongoClient(uri)
     db = client.general
-    collection = db.firstcollection
-    collection.insert_one(data)
-    print("hello")
-    for item in collection.find():
-        print(item)
+    return db
 
+
+def add_data(collection_name, data):
+    db = connect_to_mongo()
+    collection = db[collection_name].insert_one(data)
+
+
+def get_data(collection_name):
+    db = connect_to_mongo()
+    data = db[collection_name].find()
+    return data
+
+
+@app.route('/submit_history', methods=['POST', 'GET'])
+def submit_history():
+    if request.method == 'POST':
+        data = request.form.to_dict()
+        add_data('work_history',data)
+    return '<a href=http://ztmweb.samami.com/showhistory>Show History</a>'
 
 @app.route('/submit_form', methods=['POST', 'GET'])
 def submit_form():
@@ -38,6 +53,11 @@ def submit_form():
         write_to_mongo(data)
     return 'Form Submitted'
 
+
+@app.route('/showhistory')
+def show_history():
+    data = list(get_data('work_history'))
+    return render_template('show_history.html', data = data)
 
 
 if __name__ == '__main__':
