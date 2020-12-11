@@ -1,5 +1,6 @@
 from flask import Flask, render_template, send_from_directory, request
 from pymongo import MongoClient
+from config import mongo_connect_string
 
 app = Flask(__name__)
 
@@ -21,7 +22,7 @@ def write_to_file(data):
 
 
 def connect_to_mongo():
-    uri = 'mongodb+srv://samami:jWsSXAlSaXbge2eP@cluster0.vhyil.mongodb.net/general?retryWrites=true&w=majority'
+    uri = mongo_connect_string
     client = MongoClient(uri)
     db = client.general
     return db
@@ -62,8 +63,3 @@ def show_history():
 
 if __name__ == '__main__':
     app.run()
-
-
-# mongodb passsword jWsSXAlSaXbge2eP
-# mongousername samami
-# mongodb+srv://samami:<password>@cluster0.vhyil.mongodb.net/<dbname>?retryWrites=true&w=majority
