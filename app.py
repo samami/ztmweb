@@ -50,7 +50,6 @@ def submit_history():
 def submit_form():
     if request.method == 'POST':
         data = request.form.to_dict()
-        # write_to_file(data)
         write_to_mongo(data)
     return 'Form Submitted'
 
