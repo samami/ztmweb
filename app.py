@@ -3,7 +3,6 @@ import dataio
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -20,6 +19,7 @@ def submit_history():
         data = request.form.to_dict()
         dataio.add_data('work_history',data)
     return '<a href=' + url_for('show_history') + '>Show History</a>'
+
 
 @app.route('/submit_form', methods=['POST', 'GET'])
 def submit_form():
