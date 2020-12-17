@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, url_for
 import dataio
+from email_sender import send_email
 
 app = Flask(__name__)
 
@@ -26,6 +27,7 @@ def submit_form():
     if request.method == 'POST':
         data = request.form.to_dict()
         dataio.add_data('first_collection', data)
+        send_email({'to':'svalenti@gmail.com', 'from':data['email'], 'subject':'ZTM Lead ' + data['name'], 'message':data['message']})
     return 'Form Submitted'
 
 
